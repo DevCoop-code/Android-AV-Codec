@@ -34,12 +34,12 @@ public class MainActivity extends AppCompatActivity {
         SurfaceHolder.Callback callback = new SurfaceHolder.Callback() {
             @Override
             public void surfaceCreated(SurfaceHolder surfaceHolder) {
-
+                Log.d(LOG_TAG, "surfaceCreated() calling");
             }
 
             @Override
             public void surfaceChanged(SurfaceHolder surfaceHolder, int i, int i1, int i2) {
-                Log.d(LOG_TAG, "surfaceChanged() calling...");
+                Log.d(LOG_TAG, "surfaceChanged() calling");
                 if (mPlayer==null)
                 {
                     mPlayer = new PlayerThread(surfaceHolder.getSurface());
@@ -49,7 +49,10 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void surfaceDestroyed(SurfaceHolder surfaceHolder) {
-
+                Log.d(LOG_TAG, "surfaceDestroyed() calling");
+                if(mPlayer != null){
+                    mPlayer.interrupt();
+                }
             }
         };
 
